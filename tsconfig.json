@@ -1,0 +1,59 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "paths": {
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@env/*": [
+        "./src/environments/*"
+      ],
+      "@guards": [
+        "./src/app/guards"
+      ],
+      "@layout": [
+        "./src/app/layout"
+      ],
+      "@models/*": [
+        "./src/app/models/*"
+      ],
+      "@shared/*": [
+        "./src/app/shared/*"
+      ],
+      "@servicesApp/*": [
+        "./src/app/services/app/*"
+      ],
+      "@servicesHttp/*": [
+        "./src/app/services/http/*"
+      ],
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

@@ -1,0 +1,20 @@
+<p-sidebar [(visible)]="coreService.sidebarVisible">
+  <ng-template pTemplate="header">{{ authService.systemShortName }}</ng-template>
+
+  <ng-template pTemplate="content">
+    <p-panelMenu [model]="menus">
+
+    </p-panelMenu>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    &copy; Ministerio de Turismo {{ currentYear }}
+  </ng-template>
+</p-sidebar>
+
+<p-dialog [(visible)]="isVisibleAbout"
+          [modal]="true"
+          [style]="{width: '50%'}"
+          header="Acerca de">
+  <app-about/>
+</p-dialog>

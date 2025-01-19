@@ -1,0 +1,16 @@
+@if (isVisible) {
+  <p-button
+    severity="success"
+    [icon]="PrimeIcons.EYE"
+    pTooltip="Es Visible">
+  </p-button>
+}
+
+@if (!isVisible) {
+  <p-button
+    class="p-button-danger"
+    [icon]="PrimeIcons.EYE_SLASH"
+    pTooltip="Está Oculto">
+  </p-button>
+}
+

@@ -1,0 +1,107 @@
+<p-panel class="p-fluid">
+  <ng-template pTemplate="header">
+    <h2>Formulario de Empleado</h2>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    <form [formGroup]="form" class="formgrid grid">
+      <!-- identification -->
+      <div class="field col-12">
+        <label
+          for="identification"
+          appLabel
+          label="Identificacion"
+          [required]="identificationField"></label>
+
+        <app-form-help-field content="Ingrese su cedula Ej. 1723232323"/>
+
+        <input pInputText id="identification" formControlName="identification"/>
+
+        <small
+          appErrorMessage
+          [errors]="identificationField.errors"
+          [touched]="identificationField.touched"
+          [dirty]="identificationField.dirty"></small>
+      </div>
+
+      <!-- Nombre -->
+      <div class="field col-12 xl:col-12 lg:col-5 md:col-6 sm:col-12">
+        <label for="name">Nombre:</label>
+        <input id="name" pInputText formControlName="name" placeholder="Ingrese su nombre"/>
+      </div>
+
+      <!-- Apellido -->
+      <div class="field col-12 xl:col-5 lg:col-5 md:col-6 sm:col-12">
+        <label for="lastname">Apellido:</label>
+        <br>
+        <input id="lastname" pInputText formControlName="lastname" placeholder="Ingrese su apellido"/>
+      </div>
+
+      <!-- Correo Electrónico -->
+      <div class="field col-12 xl:col-5 lg:col-5 md:col-6 sm:col-12">
+        <label for="email">Correo Electrónico:</label>
+        <br>
+        <input
+          id="email"
+          pInputText
+          formControlName="email"
+          placeholder="Ingrese su correo electrónico"
+        />
+      </div>
+
+      <!-- Teléfono -->
+      <div class="field col-12 xl:col-5 lg:col-5 md:col-6 sm:col-12">
+        <label for="phone">Teléfono:</label>
+        <input
+          id="phone"
+          pInputText
+          formControlName="phone"
+          placeholder="Ingrese su teléfono"
+        />
+      </div>
+
+      <!-- Fecha de Nacimiento -->
+      <div class="field col-12 xl:col-5 lg:col-5 md:col-6 sm:col-12">
+        <label for="birthdate">Fecha de Nacimiento:</label>
+        <br>
+        <p-calendar id="birthdate" formControlName="birthdate" dateFormat="dd/mm/yy"/>
+      </div>
+
+      <!-- Género -->
+      <div class="field col-12 xl:col-5 lg:col-5 md:col-6 sm:col-12">
+        <label for="sex">Sexo:</label>
+        <br>
+        <p-dropdown
+          id="sex"
+          formControlName="sex"
+          [options]="sexes"
+          optionLabel="name"
+          appendTo="body"
+          placeholder="Seleccione género">
+        </p-dropdown>
+      </div>
+
+      <!-- position -->
+      <div class="field col-12 xl:col-5 lg:col-5 md:col-6 sm:col-12" formGroupName="employee">
+        <label for="position">Cargo:</label>
+        <p-dropdown
+          id="position"
+          formControlName="position"
+          optionLabel="name"
+          [filter]="true"
+          filterBy="code,name"
+          [options]="positions"
+          placeholder="Seleccione cargo">
+        </p-dropdown>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="formgrid grid">
+      <div class="col-12">
+        <p-button label="Guardar" [icon]="PrimeIcons.SAVE" (click)="onSubmit()"/>
+      </div>
+    </div>
+  </ng-template>
+</p-panel>

@@ -1,0 +1,96 @@
+<p-panel class="p-fluid">
+  <ng-template pTemplate="header">
+    <h2>Lista de Empleados</h2>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    <p-table
+      [value]="items"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[5, 10, 20]"
+      [responsiveLayout]="'scroll'"
+      sortField="name"
+      sortMode="single"
+      [tableStyle]="{'min-width': '70rem'}"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="identification">Cédula
+            <p-sortIcon field="identification"/>
+          </th>
+          <th pSortableColumn="name">Nombre
+            <p-sortIcon field="name"/>
+          </th>
+          <th pSortableColumn="lastname">Apellido
+            <p-sortIcon field="lastname"/>
+          </th>
+          <th pSortableColumn="email">Correo Electrónico
+            <p-sortIcon field="email"/>
+          </th>
+          <th pSortableColumn="phone">Teléfono
+            <p-sortIcon field="phone"/>
+          </th>
+          <th pSortableColumn="employee.position.name">Cargo
+            <p-sortIcon field="employee.position.name"/>
+          </th>
+          <th pSortableColumn="enabled">Estado
+            <p-sortIcon field="enabled"/>
+          </th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-item>
+        <tr>
+          <td>{{ item.user.identification }}</td>
+          <td>{{ item.user.name }}</td>
+          <td>{{ item.user.lastname }}</td>
+          <td>{{ item.user.email }}</td>
+          <td>{{ item.user.phone }}</td>
+          <td>{{ item.position.name }}</td>
+          <td>
+            <p-tag [value]="item.enabled?'Habilitado':'Deshabilitado'"
+                   [severity]="item.enabled?'success':'danger'"/>
+          </td>
+
+          <td>
+            <p-button [icon]="PrimeIcons.PENCIL" severity="warning" pTooltip="Editar"
+                      (click)="editEmployeeModal(item)"/>
+            @if (item.enabled) {
+              <p-button [icon]="PrimeIcons.BAN" severity="danger" pTooltip="Deshabilitar"
+                        (click)="disableEmployee(item.id )"/>
+            } @else {
+              <p-button [icon]="PrimeIcons.CHECK" severity="success" pTooltip="Habilitar"
+                        (click)="enableEmployee(item.id )"/>
+            }
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="formgrid grid">
+      <div class="col-12">
+        <p-button label="Agregar Empleado" [icon]="PrimeIcons.PLUS" class="p-button-success"
+                  (click)="createEmployeeModal()"/>
+      </div>
+    </div>
+  </ng-template>
+</p-panel>
+
+
+<p-dialog header="Edit Profile"
+          [modal]="true"
+          [(visible)]="employeeModal"
+          [style]="{ width: '50rem' }">
+  @if (employeeModal) {
+    @if (isNew) {
+      <app-employee-form (savedOut)="employeeModal=false; findEmployees()"/>
+    } @else {
+      else
+      <app-employee-form [userId]="selectedItem?.user?.id" (savedOut)="employeeModal=false; findEmployees()"/>
+    }
+  }
+</p-dialog>
