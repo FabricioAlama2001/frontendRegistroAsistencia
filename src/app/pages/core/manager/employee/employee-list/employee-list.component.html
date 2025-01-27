@@ -34,6 +34,10 @@
           <th pSortableColumn="employee.position.name">Cargo
             <p-sortIcon field="employee.position.name"/>
           </th>
+          <th pSortableColumn="schedule">
+            Horario
+            <p-sortIcon field="enabled"/>
+          </th>
           <th pSortableColumn="enabled">Estado
             <p-sortIcon field="enabled"/>
           </th>
@@ -50,6 +54,13 @@
           <td>{{ item.user.phone }}</td>
           <td>{{ item.position.name }}</td>
           <td>
+            @if (item.schedule) {
+              {{ item.schedule.hourStartedAt }}:{{item.schedule.minuteStartedAt}} - {{item.schedule.hourEndedAt }}:{{item.schedule.minuteEndedAt}}
+            }@else{
+              Sin Horario
+            }
+          </td>
+          <td>
             <p-tag [value]="item.enabled?'Habilitado':'Deshabilitado'"
                    [severity]="item.enabled?'success':'danger'"/>
           </td>
@@ -57,6 +68,10 @@
           <td>
             <p-button [icon]="PrimeIcons.PENCIL" severity="warning" pTooltip="Editar"
                       (click)="editEmployeeModal(item)"/>
+
+            <p-button [icon]="PrimeIcons.PENCIL" severity="warning" pTooltip="Asignar"
+                      (click)="assignScheduleModal(item)"/>
+
             @if (item.enabled) {
               <p-button [icon]="PrimeIcons.BAN" severity="danger" pTooltip="Deshabilitar"
                         (click)="disableEmployee(item.id )"/>
@@ -80,7 +95,6 @@
   </ng-template>
 </p-panel>
 
-
 <p-dialog header="Edit Profile"
           [modal]="true"
           [(visible)]="employeeModal"
@@ -92,5 +106,39 @@
       else
       <app-employee-form [userId]="selectedItem?.user?.id" (savedOut)="employeeModal=false; findEmployees()"/>
     }
+  }
+</p-dialog>
+
+<p-dialog header="Edit Profile"
+          [modal]="true"
+          [(visible)]="scheduleModal"
+          [style]="{ width: '50rem' }">
+  @if (scheduleModal) {
+    <form class="p-fluid grid">
+      <div class="field col-12">
+        <p-dropdown id="schedule"
+                    dataKey="id"
+                    appendTo="body"
+                    [formControl]="scheduleControl"
+                    [options]="schedules"
+                    [filter]="true"
+                    filterBy="name"
+                    placeholder="Seleccione...">
+          <ng-template pTemplate="item" let-item>
+            <div>{{ item.hourStartedAt }}:{{item.minuteStartedAt}} - {{item.hourEndedAt }}:{{item.minuteEndedAt}}</div>
+          </ng-template>
+
+          <ng-template pTemplate="selectedItem">
+            @if (scheduleControl.value) {
+              <div>{{ scheduleControl.value.hourStartedAt}}:{{scheduleControl.value.minuteStartedAt}} - {{scheduleControl.value.hourEndedAt}}:{{scheduleControl.value.minuteEndedAt}}</div>
+            }
+          </ng-template>
+        </p-dropdown>
+      </div>
+
+      <div class="field col-12">
+        <p-button label="Asignar" [icon]="PrimeIcons.SAVE" (click)="assignSchedule()"/>
+      </div>
+    </form>
   }
 </p-dialog>

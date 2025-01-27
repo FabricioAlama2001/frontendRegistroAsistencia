@@ -1,0 +1,1 @@
+{"version":3,"file":"agreement.model.js","sourceRoot":"","sources":["../../../../src/app/models/core/agreement.model.ts"],"names":[],"mappings":"AA4CA,MAAM,UAAU,oBAAoB;IAClC,OAAO;QACL,oBAAoB,EAAE,EAAE;QACxB,oBAAoB,EAAE,EAAE;QACxB,UAAU,EAAE,EAAE;QACd,WAAW,EAAE,EAAE;QACf,SAAS,EAAE,EAAE;QACb,iBAAiB,EAAE,EAAE;KACtB,CAAA;AACH,CAAC"}

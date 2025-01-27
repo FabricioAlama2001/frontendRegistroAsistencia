@@ -1,12 +1,11 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {debounceTime, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '@env/environment';
 import {ServerResponse} from '@models/http-response';
 import {CoreService, MessageDialogService, MessageService} from '@servicesApp/core';
-import {AgreementModel, CatalogueModel} from '@models/core';
-import {CatalogueTypeEnum} from "@shared/enums";
+import {AgreementModel, CatalogueModel, Schedule, ScheduleModel} from '@models/core';
 import {EmployeeModel} from "@models/core/employee.model";
 import {UserModel} from "@models/auth";
 
@@ -86,6 +85,18 @@ export class EmployeesHttpService {
     );
   }
 
+  assignSchedule(id: string, payload: ScheduleModel): Observable<AgreementModel> {
+    const url = `${this.API_URL}/${id}/assign-schedules`;
+    this.coreService.isProcessing = true;
+
+    return this.httpClient.patch<ServerResponse>(url, payload).pipe(
+      map(response => {
+        this.coreService.isProcessing = false;
+        this.messageDialogService.successHttp(response);
+        return response.data;
+      })
+    );
+  }
 
   finish(id: string): Observable<AgreementModel> {
     const url = `${this.API_URL}/${id}/finish`;

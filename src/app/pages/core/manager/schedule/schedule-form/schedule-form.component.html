@@ -1,1 +1,113 @@
-<p>schedule-form works!</p>
+<p-panel class="p-fluid">
+  <ng-template pTemplate="header">
+    <h2>Formulario de Horario</h2>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    <form [formGroup]="form" class="formgrid grid">
+      <!-- Horario de inicio -->
+      <div class="field col-12 xl:col-6">
+        <label
+          for="hourStartedAt"
+          appLabel
+          label="Horario de Inicio"
+          [required]="hourStartedAtField">
+        </label>
+
+        <app-form-help-field content="Seleccione la hora de inicio para el horario"></app-form-help-field>
+
+        <p-inputNumber id="hourStartedAt"
+                    formControlName="hourStartedAt"
+                   [showButtons] = true
+                    [max]="23"
+                    [min]="0"/>
+        <small
+          appErrorMessage
+          [errors]="hourStartedAtField.errors"
+          [touched]="hourStartedAtField.touched"
+          [dirty]="hourStartedAtField.dirty">
+        </small>
+      </div>
+
+      <!-- minutos de inicio -->
+      <div class="field col-12 xl:col-6">
+        <label
+          for="minuteStartedAt"
+          appLabel
+          label="Horario de Inicio"
+          [required]="minuteStartedAtField">
+        </label>
+
+        <app-form-help-field content="Seleccione la hora de inicio para el horario"></app-form-help-field>
+
+        <p-inputNumber id="minuteStartedAt"
+                       formControlName="minuteStartedAt"
+                       [showButtons] = true
+                       [max]="59"
+                       [min]="0"/>
+        <small
+          appErrorMessage
+          [errors]="minuteStartedAtField.errors"
+          [touched]="minuteStartedAtField.touched"
+          [dirty]="minuteStartedAtField.dirty">
+        </small>
+
+      </div>
+
+      <div class="field col-12 xl:col-6">
+        <label
+          for="hourEndedAt"
+          appLabel
+          label="Horario de Inicio"
+          [required]="hourEndedAtField">
+        </label>
+
+        <app-form-help-field content="Seleccione la hora de inicio para el horario"></app-form-help-field>
+
+        <p-inputNumber id="hourEndedAt"
+                       formControlName="hourEndedAt"
+                       [showButtons] = true
+                       [max]="23"
+                       [min]="0"/>
+        <small
+          appErrorMessage
+          [errors]="hourEndedAtField.errors"
+          [touched]="hourEndedAtField.touched"
+          [dirty]="hourEndedAtField.dirty">
+        </small>
+      </div>
+      <!-- Minutos de fin -->
+      <div class="field col-12 xl:col-6">
+        <label
+          for="minuteEndedAt"
+          appLabel
+          label="Horario de Inicio"
+          [required]="minuteEndedAtField">
+        </label>
+
+        <app-form-help-field content="Seleccione la hora de inicio para el horario"></app-form-help-field>
+
+        <p-inputNumber id="minuteEndedAt"
+                       formControlName="minuteEndedAt"
+                       [showButtons] = true
+                       [max]="59"
+                       [min]="0"/>
+        <small
+          appErrorMessage
+          [errors]="minuteEndedAtField.errors"
+          [touched]="minuteEndedAtField.touched"
+          [dirty]="minuteEndedAtField.dirty">
+        </small>
+      </div>
+
+    </form>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="formgrid grid">
+      <div class="col-12">
+        <p-button label="Guardar" [icon]="PrimeIcons.SAVE" (click)="onSubmit()"></p-button>
+      </div>
+    </div>
+  </ng-template>
+</p-panel>

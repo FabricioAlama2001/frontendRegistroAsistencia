@@ -1,4 +1,4 @@
-import {CatalogueModel} from '@models/core';
+import {CatalogueModel, ScheduleModel} from '@models/core';
 import {UserModel} from "@models/auth";
 
 export interface EmployeeModel {
@@ -9,6 +9,7 @@ export interface EmployeeModel {
 
   user: UserModel;
   position: CatalogueModel;
+  schedule: ScheduleModel;
 }
 
 export interface CreateContinentDto extends Omit<EmployeeModel, 'id'> {}

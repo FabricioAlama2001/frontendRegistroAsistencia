@@ -8,6 +8,8 @@ export {AdministratorsHttpService} from './administrators-http.service';
 export {PeriodsHttpService} from './periods-http.service';
 export {TrackingLogsHttpService} from './tracking-logs-http.service';
 export {EmployeesHttpService} from './employees-http.service';
+export {SchedulesHttpService} from './schedules-http.service';
+
 
 export * from './administrator-employees-http.service';
 

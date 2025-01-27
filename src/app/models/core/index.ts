@@ -47,3 +47,20 @@ export * from './vacation-detail.interface';
 
 
 export * from './dashboard.model';
+export * from './schedule.model';
+
+// Solución para conflictos entre `continent.model` y `employee.model`
+export {
+  ContinentModel,
+  CreateContinentDto,
+  UpdateContinentDto,
+  SelectContinentDto
+} from './continent.model';
+
+export {
+  EmployeeModel,
+  CreateContinentDto as CreateEmployeeDto,
+  UpdateContinentDto as UpdateEmployeeDto,
+  SelectContinentDto as SelectEmployeeDto
+} from './employee.model';
+
