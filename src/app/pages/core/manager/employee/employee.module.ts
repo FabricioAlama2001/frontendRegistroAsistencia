@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
-import { ScheduleAssignmentComponent } from './schedule-assignment/schedule-assignment.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {PanelModule} from "primeng/panel";
 import {CalendarModule} from "primeng/calendar";
@@ -20,7 +19,6 @@ import {TagModule} from "primeng/tag";
   declarations: [
     EmployeeListComponent,
     EmployeeFormComponent,
-    ScheduleAssignmentComponent
   ],
   imports: [
     CommonModule,

@@ -10,11 +10,11 @@
         <label
           for="hourStartedAt"
           appLabel
-          label="Horario de Inicio"
+          label="Desde las"
           [required]="hourStartedAtField">
         </label>
 
-        <app-form-help-field content="Seleccione la hora de inicio para el horario"></app-form-help-field>
+        <app-form-help-field content="Seleccione la hora desde la que comienza el horario"></app-form-help-field>
 
         <p-inputNumber id="hourStartedAt"
                     formControlName="hourStartedAt"
@@ -34,11 +34,11 @@
         <label
           for="minuteStartedAt"
           appLabel
-          label="Horario de Inicio"
+          label="Minutos Desde"
           [required]="minuteStartedAtField">
         </label>
 
-        <app-form-help-field content="Seleccione la hora de inicio para el horario"></app-form-help-field>
+        <app-form-help-field content="Seleccione los minutos desde los que comienza el horario"></app-form-help-field>
 
         <p-inputNumber id="minuteStartedAt"
                        formControlName="minuteStartedAt"
@@ -53,16 +53,16 @@
         </small>
 
       </div>
-
+      <!-- Horario de Fin -->
       <div class="field col-12 xl:col-6">
         <label
           for="hourEndedAt"
           appLabel
-          label="Horario de Inicio"
+          label="Hasta las"
           [required]="hourEndedAtField">
         </label>
 
-        <app-form-help-field content="Seleccione la hora de inicio para el horario"></app-form-help-field>
+        <app-form-help-field content="Seleccione la hora hasta la que termina el horario"></app-form-help-field>
 
         <p-inputNumber id="hourEndedAt"
                        formControlName="hourEndedAt"
@@ -81,11 +81,11 @@
         <label
           for="minuteEndedAt"
           appLabel
-          label="Horario de Inicio"
+          label="Minutos Hasta"
           [required]="minuteEndedAtField">
         </label>
 
-        <app-form-help-field content="Seleccione la hora de inicio para el horario"></app-form-help-field>
+        <app-form-help-field content="Seleccione los minutos hasta los que termina el horario"></app-form-help-field>
 
         <p-inputNumber id="minuteEndedAt"
                        formControlName="minuteEndedAt"

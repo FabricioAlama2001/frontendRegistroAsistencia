@@ -1,9 +1,10 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { SchedulesHttpService } from '@servicesHttp/core/schedules-http.service';
-import { ScheduleModel } from '@models/core/schedule.model';
+import {SchedulesHttpService} from '@servicesHttp/core/schedules-http.service';
+import {ScheduleModel} from '@models/core/schedule.model';
 import {PrimeIcons} from "primeng/api";
 import {format} from "date-fns";
+import {MessageDialogService} from "@servicesApp/core";
 
 @Component({
   selector: 'app-schedule-form',
@@ -14,11 +15,13 @@ export class ScheduleFormComponent implements OnInit {
   protected form!: FormGroup;
   private readonly formBuilder = inject(FormBuilder);
   private readonly schedulesHttpService = inject(SchedulesHttpService);
+  private readonly messageDialogService = inject(MessageDialogService);
 
   @Input() scheduleId!: string | undefined; // Para cargar datos existentes
   @Output() savedOut: EventEmitter<boolean> = new EventEmitter(false);
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.buildScheduleForm();
@@ -28,7 +31,7 @@ export class ScheduleFormComponent implements OnInit {
   }
 
   findSchedule(scheduleId: string): void {
-    this.schedulesHttpService.findOne(scheduleId).subscribe(response  => {
+    this.schedulesHttpService.findOne(scheduleId).subscribe(response => {
       this.form.patchValue(response);
     });
   }
@@ -42,7 +45,7 @@ export class ScheduleFormComponent implements OnInit {
         hourEndedAt: [null, [Validators.required]],
         minuteEndedAt: [null, [Validators.required]],
       },
-      { validators: this.timeRangeValidator }
+      {validators: this.timeRangeValidator}
     );
   }
 
@@ -51,7 +54,7 @@ export class ScheduleFormComponent implements OnInit {
     const startTime = formGroup.get('startTime')?.value;
     const endTime = formGroup.get('endTime')?.value;
     if (startTime && endTime && startTime >= endTime) {
-      return { invalidRange: true };
+      return {invalidRange: true};
     }
     return null;
   }
@@ -59,11 +62,17 @@ export class ScheduleFormComponent implements OnInit {
   // Método para manejar el envío del formulario
   onSubmit(): void {
     if (this.form.valid) {
-      if (this.scheduleId) {
-        this.updateSchedule();
+      if (this.validateTime()) {
+        if (this.scheduleId) {
+          this.updateSchedule();
+        } else {
+          this.createSchedule();
+        }
       } else {
-        this.createSchedule();
+        this.messageDialogService.errorCustom('La hora de inicio no puede ser menor a la final', '');
       }
+    } else {
+      this.form.markAllAsTouched();
     }
   }
 
@@ -73,6 +82,18 @@ export class ScheduleFormComponent implements OnInit {
     this.schedulesHttpService.create(this.form.value).subscribe(() => {
       this.savedOut.emit(true);
     });
+  }
+
+  validateTime() {
+    if (this.hourStartedAtField.value > this.hourEndedAtField.value) {
+      return false;
+    } else {
+      if (this.minuteStartedAtField.value > this.minuteEndedAtField.value) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   // Actualizar un horario existente
@@ -89,6 +110,7 @@ export class ScheduleFormComponent implements OnInit {
   get hourEndedAtField(): AbstractControl {
     return this.form.controls['hourEndedAt'];
   }
+
   get minuteStartedAtField(): AbstractControl {
     return this.form.controls['minuteStartedAt'];
   }
@@ -96,5 +118,6 @@ export class ScheduleFormComponent implements OnInit {
   get minuteEndedAtField(): AbstractControl {
     return this.form.controls['minuteEndedAt'];
   }
+
   protected readonly PrimeIcons = PrimeIcons;
 }

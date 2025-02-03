@@ -37,7 +37,8 @@ export class EmployeeFormComponent implements OnInit {
 
   buildUserForm() {
     this.form = this.formBuilder.group({
-      identification: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(12), Validators.pattern(/^\d{10}$/)]],
+      identification: [null, [Validators.required, Validators.minLength(10),
+        Validators.maxLength(12), Validators.pattern(/^\d{10}$/)]],
       name: ['', [Validators.required, Validators.maxLength(50)]],
       lastname: ['', [Validators.required, Validators.maxLength(50)]],
       birthdate: ['', Validators.required],

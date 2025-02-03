@@ -1,5 +1,5 @@
 export enum LoginFormEnum {
-  username = 'Correo electrónico instuticional',
+  username = 'Número de identificación',
   password = 'Contraseña',
   passwordNew = 'Nueva contraseña',
   passwordConfirmation = 'Repita la contraseña',

@@ -10,6 +10,7 @@ export * from './core/enabled.pipe';
 export * from './core/enabled-severity.pipe';
 export * from './core/yesNo.pipe';
 export * from './core/custom-format-date.pipe';
+export * from './core/integer-time.pipe';
 
 
 

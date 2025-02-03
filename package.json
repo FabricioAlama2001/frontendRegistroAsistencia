@@ -8,6 +8,8 @@
     "build:development": "ng build --configuration development",
     "build:qa": "ng build --configuration qa",
     "build:prod": "ng build --configuration production",
+    "start:prod": "ng serve --host 0.0.0.0 --configuration production",
+    "start:qa": "ng serve --host 0.0.0.0 --configuration qa",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -25,6 +27,7 @@
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "@types/leaflet": "^1.9.12",
+    "chart.js": "^4.4.7",
     "date-fns": "^3.6.0",
     "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",

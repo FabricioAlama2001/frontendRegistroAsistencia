@@ -1,12 +1,18 @@
 body {
-  background-image: url("/assets/images/pages/auth/login/login.jpg");
+  background-image: url("/assets/images/pages/auth/login/prueba1.jpeg");
   //background-repeat: no-repeat;
   background-size: cover;
 }
 
 .p-panel-content {
-  opacity: 90%;
+  opacity: 95%;
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 20px; /* Espaciado interno */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para un efecto elevado */
+  transition: all 0.3s ease-in-out; /* Suaviza las transiciones */
 }
+
 
 .p-panel-header {
   opacity: 70%;
@@ -15,3 +21,19 @@ body {
 .p-panel-footer {
   opacity: 80%;
 }
+.logo {
+  width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+.centrado {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100vh; /* Ocupar toda la pantalla */
+}
+
+
+

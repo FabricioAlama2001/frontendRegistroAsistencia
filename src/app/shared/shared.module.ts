@@ -21,7 +21,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {DividerModule} from "primeng/divider";
 import {CardModule} from "primeng/card";
 import {OverlayPanelModule} from "primeng/overlaypanel";
-import {NG_VALUE_ACCESSOR, ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import {SearchComponent} from './components/search/search.component';
 import {
   ActivePipe,
@@ -34,7 +34,7 @@ import {
   SelecetedPipe,
   StatePipe,
   YesNoPipe,
-  CustomFormatDatePipe,
+  CustomFormatDatePipe, IntegerTimePipe,
 } from '@shared/pipes';
 import {UserStatePipe} from "@shared/pipes/auth/userState.pipe";
 import {LocationComponent} from './components/location/location.component';
@@ -103,6 +103,7 @@ import {BadgeModule} from "primeng/badge";
     FormHelpFieldComponent,
     CustomFormatDatePipe,
     InputSwitchComponent,
+    IntegerTimePipe
   ],
   exports: [
     SkeletonComponent,
@@ -140,7 +141,8 @@ import {BadgeModule} from "primeng/badge";
     FormButtonActionComponent,
     FormHelpFieldComponent,
     CustomFormatDatePipe,
-    InputSwitchComponent
+    InputSwitchComponent,
+    IntegerTimePipe
   ],
     imports: [
         CommonModule,

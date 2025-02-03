@@ -1,18 +1,19 @@
-<div class="grid">
+<div class="grid centrado">
   <p-panel class="col-12 xl:col-4 lg:col-4 md:col-6 sm:col-12">
     <ng-template pTemplate="header">
       <div class="flex align-items-center gap-2">
-        <span class="font-bold p-error">{{ authService.system }}</span>
+        <span class="font-bold" [ngClass]="{'p-error':!environment.production}">{{ authService.system }}</span>
       </div>
     </ng-template>
 
     <ng-template pTemplate="content">
       <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-fluid grid">
         <div class="field col-12 text-center">
-          @if (!environment.production) {
-            <h2>PRUEBAS</h2>
+          @if (environment.production) {
+            <img src="/assets/images/pages/auth/login/logo_login.png" class="logo" alt="Logo">
+          } @else {
+            <img src="/assets/images/pages/auth/login/logo_login.png" class="logo" alt="Logo">
           }
-
           <h2 [ngClass]="{'p-error':!environment.production}">
             Ingreso al Sistema {{ authService.systemShortName }}
           </h2>
@@ -25,7 +26,6 @@
             [required]="usernameField"></label>
           <p-inputGroup>
             <input pInputText id="username" formControlName="username">
-            <p-inputGroupAddon>&#64;turismo.gob.ec</p-inputGroupAddon>
           </p-inputGroup>
 
           <small appErrorMessage
@@ -58,15 +58,6 @@
             [icon]="PrimeIcons.SIGN_IN"></p-button>
         </div>
       </form>
-    </ng-template>
-
-    <ng-template pTemplate="footer">
-      <div class="flex flex-wrap align-items-center justify-content-between gap-3">
-        <p-button
-          severity="info"
-          [icon]="PrimeIcons.DOWNLOAD"
-          label="Descargar Manual de Usuario"/>
-      </div>
     </ng-template>
   </p-panel>
 </div>

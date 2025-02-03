@@ -1,0 +1,101 @@
+<p-panel class="p-fluid">
+  <ng-template pTemplate="header">
+    <h2>Lista de Asistencia</h2>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    <p-table
+      [value]="items"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[5, 10, 20]"
+      [responsiveLayout]="'scroll'"
+      sortField="registeredAt"
+      sortMode="single"
+      [tableStyle]="{'min-width': '70rem'}"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="employee.name">Empleado
+            <p-sortIcon field="employee.name"/>
+          </th>
+          <th pSortableColumn="type.name">Tipo de asistencia
+            <p-sortIcon field="type.name"/>
+          </th>
+          <th pSortableColumn="registeredAt">Fecha
+            <p-sortIcon field="registeredAt"/>
+          </th>
+          <th pSortableColumn="late">Tarde
+            <p-sortIcon field="late"/>
+          </th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-item>
+        <tr>
+          <td>{{ item.employee.user.name }}{{ item.employee.user.lastname }}</td>
+          <td>{{ item.type.name }}</td>
+          <td>{{ item.registeredAt | date: 'medium'}}</td>
+          <td>
+            @if (item.late) {
+              @if (item.type.code === 'entry') {
+                Tarde
+              }
+              @if (item.type.code === 'exit') {
+                Jornada Incompleta
+              }
+              @if (item.type.code === 'lunch_exit') {
+                Almuerzo fuera del tiempo
+              }
+            } @else {
+              @if (item.type.code === 'entry') {
+                A tiempo
+              }
+              @if (item.type.code === 'exit') {
+                A tiempo
+              }
+              @if (item.type.code === 'lunch_return') {
+                A tiempo
+              }
+            }
+          </td>
+          <td>
+            <p-button
+              icon="pi pi-pencil"
+              severity="warning"
+              pTooltip="Editar"
+              (click)="editAttendanceModal(item)">
+            </p-button>
+            <p-button [icon]="PrimeIcons.TRASH" severity="danger" pTooltip="Eliminar"
+                      (click)="deleteAttendance(item.id)" />
+
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-template>
+
+  <ng-template pTemplate="footer" let-item>
+    <div class="formgrid grid">
+      <div class="col-12">
+        <p-button label="Agregar Asistencia" [icon]="PrimeIcons.PLUS" class="p-button-success"
+                  (click)="createAttendanceModal()"/>
+      </div>
+    </div>
+  </ng-template>
+</p-panel>
+
+
+<p-dialog header="Edit Profile"
+          [modal]="true"
+          [(visible)]="attendanceModal"
+          [style]="{ width: '50rem' }">
+  @if (attendanceModal) {
+    @if (isNew) {
+      <app-attendance-form (savedOut)="attendanceModal=false; findAttendances()"/>
+    } @else {
+      <app-attendance-form [attendanceId]="selectedItem?.id" (savedOut)="attendanceModal=false; findAttendances()"/>
+    }
+  }
+</p-dialog>

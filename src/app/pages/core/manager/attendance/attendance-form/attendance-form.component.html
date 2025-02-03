@@ -1,0 +1,135 @@
+<p-panel class="p-fluid">
+  <ng-template pTemplate="header">
+    <h2>Registro de Asistencia</h2>
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    <form [formGroup]="form" class="formgrid grid">
+
+
+      <!-- Selección de Empleado -->
+      <div class="field col-12 xl:col-6">
+        <label
+          for="employeeId"
+          appLabel
+          label="Empleado"
+          [required]="employeeIdField">
+        </label>
+
+        <app-form-help-field content="Seleccione el empleado que registra la asistencia"></app-form-help-field>
+        <p-dropdown
+          id="employeeId"
+          formControlName="employeeId"
+          [options]="employees"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Seleccione un empleado">
+
+          <!-- Personalización de los ítems en la lista desplegable -->
+          <ng-template let-item pTemplate="item">
+            <div>{{ item.user.name }} {{ item.user.lastname }}</div>
+          </ng-template>
+
+          <!-- Personalización del ítem seleccionado -->
+          <ng-template pTemplate="selectedItem" let-item>
+            @if (item) {
+              <div>{{ item.user.name }} {{ item.user.lastname }}</div>
+            }
+          </ng-template>
+
+        </p-dropdown>
+
+        <small
+          appErrorMessage
+          [errors]="employeeIdField.errors"
+          [touched]="employeeIdField.touched"
+          [dirty]="employeeIdField.dirty">
+        </small>
+      </div>
+
+      <!-- Tipo de Asistencia -->
+      <div class="field col-12 xl:col-6">
+        <label
+          for="typeId"
+          appLabel
+          label="Tipo de Asistencia"
+          [required]="typeIdField">
+        </label>
+
+        <app-form-help-field content="Seleccione el tipo de asistencia (Entrada, Salida, etc.)"></app-form-help-field>
+
+        <p-dropdown
+          id="typeId"
+          formControlName="typeId"
+          [options]="types"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Seleccione el tipo de asistencia">
+        </p-dropdown>
+
+        <small
+          appErrorMessage
+          [errors]="typeIdField.errors"
+          [touched]="typeIdField.touched"
+          [dirty]="typeIdField.dirty">
+        </small>
+      </div>
+
+      <!-- Fecha y Hora de Registro -->
+      <div class="field col-12 xl:col-6">
+        <label
+          for="registeredAt"
+          appLabel
+          label="Fecha y Hora"
+          [required]="registeredAtField">
+        </label>
+
+        <app-form-help-field content="Seleccione la fecha y hora de registro de la asistencia"></app-form-help-field>
+
+        <p-calendar id="registeredAt"
+                    formControlName="registeredAt"
+                    [showTime]="true"
+                    hourFormat="24"
+                    appendTo="body"
+                    >
+        </p-calendar>
+
+        <small
+          appErrorMessage
+          [errors]="registeredAtField.errors"
+          [touched]="registeredAtField.touched"
+          [dirty]="registeredAtField.dirty">
+        </small>
+      </div>
+
+      <!-- Llegó tarde -->
+      <div class="field col-12 xl:col-6">
+        <label
+          for="late"
+          appLabel
+          label="¿Llegó tarde?"
+          [required]="lateField">
+        </label>
+
+        <app-form-help-field content="Active si el empleado llegó tarde"></app-form-help-field>
+
+        <p-inputSwitch id="late" formControlName="late"></p-inputSwitch>
+
+        <small
+          appErrorMessage
+          [errors]="lateField.errors"
+          [touched]="lateField.touched"
+          [dirty]="lateField.dirty">
+        </small>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="formgrid grid">
+      <div class="col-12">
+        <p-button label="Guardar" [icon]="PrimeIcons.SAVE" (click)="onSubmit()"></p-button>
+      </div>
+    </div>
+  </ng-template>
+</p-panel>

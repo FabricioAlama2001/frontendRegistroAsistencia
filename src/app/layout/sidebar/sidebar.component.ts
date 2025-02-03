@@ -1,9 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {MenuItem, PrimeIcons} from 'primeng/api';
 import {AuthHttpService, AuthService, MenusHttpService} from "@servicesApp/auth";
-import {MenuModel} from "@models/auth";
-import {AgreementsService, CoreService, MessageService, RoutesService} from "@servicesApp/core";
-import {AgreementsHttpService} from "@servicesHttp/core";
+import {CoreService, MessageService, RoutesService} from "@servicesApp/core";
 import {format} from "date-fns";
 import {Router} from "@angular/router";
 
@@ -23,7 +21,6 @@ export class SidebarComponent implements OnInit {
   protected readonly coreService = inject(CoreService);
   private readonly menusHttpService = inject(MenusHttpService);
   private readonly authHttpService = inject(AuthHttpService);
-  private readonly agreementsService = inject(AgreementsService);
   protected readonly authService = inject(AuthService);
   protected readonly messageService = inject(MessageService);
   protected readonly routesService = inject(RoutesService);
@@ -54,7 +51,6 @@ export class SidebarComponent implements OnInit {
               label: menu.label,
               icon: menu.icon,
               command: () => {
-                this.agreementsService.clearAgreement();
                 this.coreService.sidebarVisible = false;
                 this.router.navigate([menu.routerLink])
               }

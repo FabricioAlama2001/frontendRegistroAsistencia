@@ -5,8 +5,7 @@ import {map} from 'rxjs/operators';
 import {environment} from '@env/environment';
 import {ServerResponse} from '@models/http-response';
 import {CoreService, MessageDialogService, MessageService} from '@servicesApp/core';
-import {AgreementModel, CatalogueModel, Schedule, ScheduleModel} from '@models/core';
-import {EmployeeModel} from "@models/core/employee.model";
+import {EmployeeModel,ScheduleModel} from '@models/core';
 import {UserModel} from "@models/auth";
 
 @Injectable({
@@ -40,7 +39,7 @@ export class EmployeesHttpService {
     );
   }
 
-  update(userId: string, payload: UserModel): Observable<AgreementModel> {
+  update(userId: string, payload: UserModel): Observable<UserModel> {
     const url = `${this.API_URL}/${userId}`;
     this.coreService.isProcessing = true;
     return this.httpClient.put<ServerResponse>(url, payload).pipe(
@@ -52,7 +51,7 @@ export class EmployeesHttpService {
     );
   }
 
-  disable(id: string): Observable<AgreementModel> {
+  disable(id: string): Observable<UserModel> {
     const url = `${this.API_URL}/${id}/disable`;
     this.coreService.isProcessing = true;
     return this.httpClient.patch<ServerResponse>(url, null).pipe(
@@ -85,7 +84,7 @@ export class EmployeesHttpService {
     );
   }
 
-  assignSchedule(id: string, payload: ScheduleModel): Observable<AgreementModel> {
+  assignSchedule(id: string, payload: ScheduleModel): Observable<UserModel> {
     const url = `${this.API_URL}/${id}/assign-schedules`;
     this.coreService.isProcessing = true;
 
@@ -98,101 +97,11 @@ export class EmployeesHttpService {
     );
   }
 
-  finish(id: string): Observable<AgreementModel> {
-    const url = `${this.API_URL}/${id}/finish`;
-
-    return this.httpClient.patch<ServerResponse>(url, null).pipe(
-      map(response => {
-        this.messageDialogService.successHttp(response);
-        return response.data;
-      })
-    );
-  }
-
-  uploadEnablingDocuments(id: string, formData: FormData): Observable<AgreementModel> {
-    const url = `${this.API_URL}/${id}/enabling-documents`;
-
-    return this.httpClient.post<ServerResponse>(url, formData).pipe(
-      map(response => {
-        this.messageDialogService.successHttp(response);
-        return response.data;
-      })
-    );
-  }
-
-  uploadAddendum(id: string, formData: FormData, isEdit = false): Observable<AgreementModel> {
-    const url = `${this.API_URL}/${id}/addendums`;
-
-    const params = new HttpParams().append('edit', isEdit);
-
-    return this.httpClient.post<ServerResponse>(url, formData, {params}).pipe(
-      map(response => {
-        this.messageDialogService.successHttp(response);
-        return response.data;
-      })
-    );
-  }
-
-  uploadEnablingDocument(id: string, formData: FormData, isEdit = false): Observable<AgreementModel> {
-    const url = `${this.API_URL}/${id}/enabling-documents`;
-
-    const params = new HttpParams().append('edit', isEdit);
-
-    return this.httpClient.post<ServerResponse>(url, formData, {params}).pipe(
-      map(response => {
-        this.messageDialogService.successHttp(response);
-        return response.data;
-      })
-    );
-  }
-
-  findNationalAgreementsByOrigin(): Observable<AgreementModel[]> {
-    const url = `${this.API_URL}/national-agreements`;
-    return this.httpClient.get<ServerResponse>(url).pipe(
-      map(response => {
-        return response.data;
-      })
-    );
-  }
-
-
-  findInternationalAgreementsByOrigin(): Observable<AgreementModel[]> {
-    const url = `${this.API_URL}/international-agreements`;
-    return this.httpClient.get<ServerResponse>(url).pipe(
-      map(response => {
-        return response.data;
-      })
-    );
-  }
-
-
   remove(id: string): Observable<boolean> {
     const url = `${this.API_URL}/${id}`;
     return this.httpClient.delete<ServerResponse>(url).pipe(
       map(response => {
         this.messageService.success(response);
-        return response.data;
-      })
-    );
-  }
-
-  verifyInternalNumber(internalNumber: string): Observable<AgreementModel> {
-    const url = `${this.API_URL}/${internalNumber}/verify-internalnumber`;
-
-    return this.httpClient.get<ServerResponse>(url).pipe(
-      map(response => {
-        return response.data;
-      })
-    );
-  }
-
-  verifyInternalNumberUpdate(internalNumber: string, agreementId: string): Observable<AgreementModel> {
-    const url = `${this.API_URL}/${internalNumber}/update-verify-internalnumber`;
-
-    const params = new HttpParams().append('agreementId', agreementId);
-
-    return this.httpClient.get<ServerResponse>(url, {params}).pipe(
-      map(response => {
         return response.data;
       })
     );

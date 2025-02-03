@@ -28,8 +28,8 @@
 
       <ng-template pTemplate="body" let-item>
         <tr>
-          <td>{{ item.hourStartedAt}}:{{item.minuteStartedAt}}</td>
-          <td>{{ item.hourEndedAt}}: {{item.minuteEndedAt}}</td>
+          <td>{{ item.hourStartedAt | integerTime}}:{{item.minuteStartedAt | integerTime}}</td>
+          <td>{{ item.hourEndedAt | integerTime}}:{{item.minuteEndedAt | integerTime}}</td>
           <td>
             <p-button [icon]="PrimeIcons.PENCIL" severity="warning" pTooltip="Editar"
                       (click)="editScheduleModal(item)" />
