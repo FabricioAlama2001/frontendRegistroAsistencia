@@ -69,7 +69,7 @@
             <p-button [icon]="PrimeIcons.PENCIL" severity="warning" pTooltip="Editar"
                       (click)="editEmployeeModal(item)"/>
 
-            <p-button [icon]="PrimeIcons.PENCIL" severity="warning" pTooltip="Asignar"
+            <p-button [icon]="PrimeIcons.FILE_EDIT" severity="contrast" pTooltip="Asignar"
                       (click)="assignScheduleModal(item)"/>
 
             @if (item.enabled) {
@@ -85,7 +85,7 @@
     </p-table>
   </ng-template>
 
-  <ng-template pTemplate="footer">
+  <ng-template pTemplate="header">
     <div class="formgrid grid">
       <div class="col-12">
         <p-button label="Agregar Empleado" [icon]="PrimeIcons.PLUS" class="p-button-success"

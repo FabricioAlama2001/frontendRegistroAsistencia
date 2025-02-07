@@ -1,17 +1,39 @@
+/* 📌 Fondo de pantalla */
 body {
   background-image: url("/assets/images/pages/auth/login/prueba2.jpeg");
-  //background-repeat: no-repeat;
   background-size: cover;
 }
 
-.p-panel-content {
-  opacity: 90%;
+/* 📌 Contenedor principal que centra el panel */
+.container {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh; /* Ocupar toda la pantalla */
+  width: 100vw;
 }
 
-.p-panel-header {
-  opacity: 70%;
+/* 📌 Ajuste del p-panel */
+.p-panel {
+  width: 100%;
+  max-width: 450px !important; /* 🔹 Asegurar el mismo ancho que antes */
 }
 
-.p-panel-footer {
-  opacity: 80%;
+/* 📌 Ajuste del contenido del panel */
+.p-panel .p-panel-content {
+  width: 100% !important; /* 🔹 Forzar a ocupar el ancho */
+  max-width: 450px !important;
+  opacity: 95%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+/* 📌 Ajustar el encabezado y el footer */
+.p-panel .p-panel-header,
+.p-panel .p-panel-footer {
+  width: 100% !important; /* 🔹 Asegurar que ocupen todo el espacio */
+  max-width: 450px !important;
 }

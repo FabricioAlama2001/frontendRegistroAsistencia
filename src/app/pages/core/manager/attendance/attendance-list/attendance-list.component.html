@@ -63,7 +63,7 @@
           <td>
             <p-button
               icon="pi pi-pencil"
-              severity="warning"
+              severity="contrast"
               pTooltip="Editar"
               (click)="editAttendanceModal(item)">
             </p-button>
@@ -76,7 +76,7 @@
     </p-table>
   </ng-template>
 
-  <ng-template pTemplate="footer" let-item>
+  <ng-template pTemplate="header" let-item>
     <div class="formgrid grid">
       <div class="col-12">
         <p-button label="Agregar Asistencia" [icon]="PrimeIcons.PLUS" class="p-button-success"

@@ -1,60 +1,71 @@
-<div class="grid">
-  <p-panel class="col-12 xl:col-4 lg:col-4 md:col-6 sm:col-12">
-    <ng-template pTemplate="header">
-      <div class="flex align-items-center gap-2">
-        <span class="font-bold">{{ authService.system }}</span>
-      </div>
-    </ng-template>
+<div class="container">
+  <div class="panel-container">
+    <p-panel class="custom-panel col-12 xl:col-4 lg:col-4 md:col-6 sm:col-12">
 
-    <ng-template pTemplate="content">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-fluid grid">
-        <div class="field col-12 text-center">
-          <h2>Seleccione un Rol</h2>
+      <!-- 📌 Encabezado -->
+      <ng-template pTemplate="header">
+        <div class="flex align-items-center gap-2">
+          <span class="font-bold">{{ authService.system }}</span>
         </div>
+      </ng-template>
 
-        <div class="field col-12">
-          <label for="role" appLabel [label]="LoginFormEnum.roleSelect" [required]="roleField"></label>
+      <!-- 📌 Contenido Principal -->
+      <ng-template pTemplate="content">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-fluid grid">
 
-          <p-dropdown
-            id="role"
-            formControlName="role"
-            dataKey="id"
-            [options]="roles"
-            placeholder="Seleccione"
-          appendTo="body">
+          <!-- 📌 Título -->
+          <div class="field col-12 text-center">
+            <h2>Seleccione un Rol</h2>
+          </div>
 
-            <ng-template pTemplate="selectedItem" let-selectedItem>
-              <div class="flex align-items-center gap-2">
-                <div>{{ selectedItem.name }}</div>
-              </div>
-            </ng-template>
+          <!-- 📌 Selector de Roles -->
+          <div class="field col-12">
+            <label for="role" appLabel [label]="LoginFormEnum.roleSelect" [required]="roleField"></label>
+            <p-dropdown
+              id="role"
+              formControlName="role"
+              dataKey="id"
+              [options]="roles"
+              placeholder="Seleccione"
+              appendTo="body">
 
-            <ng-template let-item pTemplate="item">
-              <div class="flex align-items-center gap-2">
-                <div>{{ item.name }}</div>
-              </div>
-            </ng-template>
-          </p-dropdown>
-        </div>
+              <ng-template pTemplate="selectedItem" let-selectedItem>
+                <div class="flex align-items-center gap-2">
+                  <div>{{ selectedItem.name }}</div>
+                </div>
+              </ng-template>
 
-        <div class="field col-12">
+              <ng-template let-item pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                  <div>{{ item.name }}</div>
+                </div>
+              </ng-template>
+            </p-dropdown>
+          </div>
+
+          <!-- 📌 Botón de Continuar -->
+          <div class="field col-12">
+            <p-button
+              type="submit"
+              label="Continuar"
+              [icon]="PrimeIcons.SIGN_IN"></p-button>
+          </div>
+
+        </form>
+      </ng-template>
+
+      <!-- 📌 Footer con botón de regreso -->
+      <ng-template pTemplate="footer">
+        <div class="flex flex-wrap align-items-center justify-content-between gap-3">
           <p-button
-            type="submit"
-            label="Continuar"
-            [icon]="PrimeIcons.SIGN_IN"></p-button>
+            severity="secondary"
+            [raised]="true"
+            [icon]="PrimeIcons.ARROW_LEFT"
+            label="Regresar al Login"
+            (click)="redirectLogin()"></p-button>
         </div>
-      </form>
-    </ng-template>
+      </ng-template>
 
-    <ng-template pTemplate="footer">
-      <div class="flex flex-wrap align-items-center justify-content-between gap-3">
-        <p-button
-          severity="secondary"
-          [raised]="true"
-          [icon]="PrimeIcons.ARROW_LEFT"
-          label="Regresar al Login"
-          (click)="redirectLogin()"></p-button>
-      </div>
-    </ng-template>
-  </p-panel>
+    </p-panel>
+  </div>
 </div>

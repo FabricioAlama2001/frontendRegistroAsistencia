@@ -10,6 +10,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   private readonly coreService = inject(CoreService);
   private readonly messageDialogService = inject(MessageDialogService);
 
+
   constructor() {
   }
 
