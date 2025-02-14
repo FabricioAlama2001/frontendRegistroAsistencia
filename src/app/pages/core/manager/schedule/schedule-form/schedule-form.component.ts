@@ -69,7 +69,7 @@ export class ScheduleFormComponent implements OnInit {
           this.createSchedule();
         }
       } else {
-        this.messageDialogService.errorCustom('La hora de inicio no puede ser menor a la final', '');
+        this.messageDialogService.errorCustom('La hora de inicio no puede ser Mayor a la final', '');
       }
     } else {
       this.form.markAllAsTouched();

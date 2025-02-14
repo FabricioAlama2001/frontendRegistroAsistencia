@@ -3,6 +3,7 @@ import { SchedulesHttpService } from '@servicesHttp/core';
 import { ScheduleModel } from '@models/core/schedule.model';
 import { FormControl } from '@angular/forms';
 import { PrimeIcons } from 'primeng/api';
+import {MessageDialogService} from "@servicesApp/core";
 
 @Component({
   selector: 'app-schedule-list',
@@ -11,6 +12,8 @@ import { PrimeIcons } from 'primeng/api';
 })
 export class ScheduleListComponent implements OnInit {
   private schedulesHttpService = inject(SchedulesHttpService);
+  private readonly messageDialogService = inject(MessageDialogService);
+
 
   items: ScheduleModel[] = [];
   selectedItem!: ScheduleModel;
@@ -59,6 +62,7 @@ export class ScheduleListComponent implements OnInit {
   deleteSchedule(id: string): void {
     this.schedulesHttpService.remove(id).subscribe(() => {
       this.findSchedules();
+      this.messageDialogService.errorCustom('Horario Eliminado', '');
     });
   }
 

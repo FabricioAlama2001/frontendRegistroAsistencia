@@ -55,7 +55,7 @@
           <td>{{ item.position.name }}</td>
           <td>
             @if (item.schedule) {
-              {{ item.schedule.hourStartedAt }}:{{item.schedule.minuteStartedAt}} - {{item.schedule.hourEndedAt }}:{{item.schedule.minuteEndedAt}}
+              {{ item.schedule.hourStartedAt | integerTime}}:{{item.schedule.minuteStartedAt | integerTime}} - {{item.schedule.hourEndedAt | integerTime }}:{{item.schedule.minuteEndedAt | integerTime}}
             }@else{
               Sin Horario
             }

@@ -1,0 +1,33 @@
+/* Centrar el gráfico de líneas */
+p-chart {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%; /* O el tamaño que prefieras */
+}
+
+/* Centrar el resumen de estadísticas */
+.statistics-summary {
+  text-align: center; /* Centra el texto dentro */
+}
+
+.stat-cards {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.stat-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 25%;
+  text-align: center;
+}
+
+.stat-card p {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}

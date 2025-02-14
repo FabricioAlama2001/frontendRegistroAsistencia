@@ -3,6 +3,7 @@ import {PrimeIcons} from 'primeng/api';
 import {AttendanceHttpService, CataloguesHttpService, EmployeesHttpService} from "@servicesHttp/core";
 import {AttendanceModel, EmployeeModel, ScheduleModel} from "@models/core";
 import {FormControl} from "@angular/forms";
+import {MessageDialogService} from "@servicesApp/core";
 
 @Component({
   selector: 'app-attendance-list',
@@ -18,6 +19,7 @@ export class AttendanceListComponent implements OnInit{
   private readonly cataloguesHttpService = inject(CataloguesHttpService);
   private readonly employeesHttpService = inject(EmployeesHttpService);
   private readonly attendanceHttpService = inject(AttendanceHttpService);
+  private readonly messageDialogService = inject(MessageDialogService);
   protected readonly PrimeIcons = PrimeIcons;
 
 
@@ -52,6 +54,7 @@ export class AttendanceListComponent implements OnInit{
   deleteAttendance(id: string): void{
   this.attendanceHttpService.remove(id).subscribe(()=>{
     this.findAttendances();
+    this.messageDialogService.errorCustom('Asistencia Eliminada', '');
     }
   )};
 
