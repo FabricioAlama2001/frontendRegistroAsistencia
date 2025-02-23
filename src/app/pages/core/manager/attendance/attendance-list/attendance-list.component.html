@@ -2,6 +2,34 @@
   <ng-template pTemplate="header">
     <h2>Lista de Asistencia</h2>
   </ng-template>
+<!--  -->
+  <div class="p-grid p-align-center">
+    <div class="p-col-12 p-md-3">
+      <input
+        pInputText
+        [formControl]="employeeNameControl"
+        placeholder="Buscar por nombre..."
+      />
+    </div>
+    <div class="p-col-12 p-md-3">
+      <p-calendar
+        [formControl]="datesControl"
+        selectionMode="range"
+      />
+    </div>
+
+    <div class="p-col-12 p-md-3">
+      <p-button label="Filtrar" icon="pi pi-search" (click)="filterAttendancesByName()"></p-button>
+    </div>
+  </div>
+
+
+
+
+
+
+
+<!--  ///////////////////-->
 
   <ng-template pTemplate="content">
     <p-table
@@ -84,6 +112,7 @@
       </div>
     </div>
   </ng-template>
+
 </p-panel>
 
 

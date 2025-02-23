@@ -71,4 +71,24 @@ export class AttendanceHttpService {
     );
   }
 
+  // Obtener asistencias filtradas por nombre del empleado
+  findAttendancesByEmployeeName(
+    employeeName: string,
+    startedAt: Date,
+    endedAt: Date
+  ): Observable<AttendanceModel[]> {
+    // Ajusta la URL a como tengas definido tu endpoint en el backend
+    const url = `${this.API_URL}/filters`;
+
+    const params = new HttpParams()
+      .append('search', employeeName)
+      .append('startedAt', startedAt.toDateString())
+      .append('endedAt', endedAt.toDateString());
+
+    return this.httpClient.get<ServerResponse>(url, { params }).pipe(
+      map(response => response.data)
+    );
+  }
+
+
 }
