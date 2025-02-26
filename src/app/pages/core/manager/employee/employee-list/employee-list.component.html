@@ -3,7 +3,34 @@
     <h2>Lista de Empleados</h2>
   </ng-template>
 
-  <ng-template pTemplate="content"git
+  <ng-template pTemplate="content">
+    <div class="p-fluid">
+      <div class="formgrid grid">
+        <div class="col-3">
+          <p-button label="Agregar Empleado" [icon]="PrimeIcons.PLUS" class="p-button-success"
+                    (click)="createEmployeeModal()"/>
+        </div>
+      </div>
+
+      <div class="formgrid grid">
+        <!-- Campo de búsqueda -->
+        <div class="field xl:col-6 lg:col-6 md:col-12 sm:col-12">
+          <label for="employeeName">Buscar:</label>
+          <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input pInputText id="employeeName"
+               [formControl]="searchControl"
+               placeholder="Buscar por identificación, nombre o apellido"
+               class="p-inputtext p-component"/>
+      </span>
+        </div>
+        <!-- Botón de Filtrar -->
+        <div class="field xl:col-2 lg:col-2 md:col-12 sm:col-12 p-5">
+          <p-button label="Buscar" icon="pi pi-filter" class="p-button-primary" (click)="filterEmployees()"></p-button>
+        </div>
+      </div>
+    </div>
+
     <p-table
       [value]="items"
       [paginator]="true"
@@ -55,8 +82,8 @@
           <td>{{ item.position.name }}</td>
           <td>
             @if (item.schedule) {
-              {{ item.schedule.hourStartedAt | integerTime}}:{{item.schedule.minuteStartedAt | integerTime}} - {{item.schedule.hourEndedAt | integerTime }}:{{item.schedule.minuteEndedAt | integerTime}}
-            }@else{
+              {{ item.schedule.hourStartedAt | integerTime }}:{{ item.schedule.minuteStartedAt | integerTime }} - {{ item.schedule.hourEndedAt | integerTime }}:{{ item.schedule.minuteEndedAt | integerTime }}
+            } @else {
               Sin Horario
             }
           </td>
@@ -82,15 +109,6 @@
         </tr>
       </ng-template>
     </p-table>
-  </ng-template>
-
-  <ng-template pTemplate="header">
-    <div class="formgrid grid">
-      <div class="col-12">
-        <p-button label="Agregar Empleado" [icon]="PrimeIcons.PLUS" class="p-button-success"
-                  (click)="createEmployeeModal()"/>
-      </div>
-    </div>
   </ng-template>
 </p-panel>
 
@@ -124,12 +142,15 @@
                     filterBy="name"
                     placeholder="Seleccione...">
           <ng-template pTemplate="item" let-item>
-            <div>{{ item.hourStartedAt }}:{{item.minuteStartedAt}} - {{item.hourEndedAt }}:{{item.minuteEndedAt}}</div>
+            <div>{{ item.hourStartedAt }}:{{ item.minuteStartedAt }} - {{ item.hourEndedAt }}:{{ item.minuteEndedAt }}
+            </div>
           </ng-template>
 
           <ng-template pTemplate="selectedItem">
             @if (scheduleControl.value) {
-              <div>{{ scheduleControl.value.hourStartedAt}}:{{scheduleControl.value.minuteStartedAt}} - {{scheduleControl.value.hourEndedAt}}:{{scheduleControl.value.minuteEndedAt}}</div>
+              <div>{{ scheduleControl.value.hourStartedAt }}:{{ scheduleControl.value.minuteStartedAt }}
+                - {{ scheduleControl.value.hourEndedAt }}:{{ scheduleControl.value.minuteEndedAt }}
+              </div>
             }
           </ng-template>
         </p-dropdown>

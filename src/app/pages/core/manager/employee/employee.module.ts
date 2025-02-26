@@ -13,6 +13,7 @@ import {SharedModule} from "@shared/shared.module";
 import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {TagModule} from "primeng/tag";
+import {DividerModule} from "primeng/divider";
 
 
 @NgModule({
@@ -20,18 +21,19 @@ import {TagModule} from "primeng/tag";
     EmployeeListComponent,
     EmployeeFormComponent,
   ],
-  imports: [
-    CommonModule,
-    EmployeeRoutingModule,
-    ReactiveFormsModule,
-    PanelModule,
-    CalendarModule,
-    DropdownModule,
-    InputTextModule,
-    SharedModule,
-    TableModule,
-    DialogModule,
-    TagModule
-  ]
+    imports: [
+        CommonModule,
+        EmployeeRoutingModule,
+        ReactiveFormsModule,
+        PanelModule,
+        CalendarModule,
+        DropdownModule,
+        InputTextModule,
+        SharedModule,
+        TableModule,
+        DialogModule,
+        TagModule,
+        DividerModule
+    ]
 })
 export class EmployeeModule { }

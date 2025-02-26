@@ -5,4 +5,5 @@ export {EmployeesHttpService} from './employees-http.service';
 export {SchedulesHttpService} from './schedules-http.service';
 export {AttendanceHttpService} from './attendances-http.service'
 export {AdministratorEmployeesHttpService} from './administrator-employees-http.service'
+export {ReportsHttpService} from './reports-http.service'
 

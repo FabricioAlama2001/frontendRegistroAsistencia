@@ -10,7 +10,7 @@
   <!-- FILTROS DE BÚSQUEDA Y BOTÓN -->
   <div class="formgrid grid">
     <!-- Campo de búsqueda -->
-    <div class="field xl:col-8 lg:col-8 md:col-12 sm:col-12">
+    <div class="field xl:col-6 lg:col-6 md:col-12 sm:col-12">
       <label for="employeeName">Buscar:</label>
       <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
@@ -25,6 +25,10 @@
     <!-- Botón de Filtrar -->
     <div class="field xl:col-2 lg:col-2 md:col-12 sm:col-12 p-5">
       <p-button label="Buscar" icon="pi pi-filter" class="p-button-primary" (click)="filterAttendancesByName()"></p-button>
+    </div>
+    <!-- Descargar Reporte -->
+    <div class="field xl:col-2 lg:col-2 md:col-12 sm:col-12 p-5">
+      <p-button label="Descagar" icon="pi pi-download" severity="warning" (click)="downloadLateAttendances()"></p-button>
     </div>
   </div>
 

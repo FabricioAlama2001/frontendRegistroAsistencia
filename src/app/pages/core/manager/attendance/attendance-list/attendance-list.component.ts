@@ -1,6 +1,11 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {PrimeIcons} from 'primeng/api';
-import {AttendanceHttpService, CataloguesHttpService, EmployeesHttpService} from "@servicesHttp/core";
+import {
+  AttendanceHttpService,
+  CataloguesHttpService,
+  EmployeesHttpService,
+  ReportsHttpService
+} from "@servicesHttp/core";
 import {AttendanceModel, EmployeeModel, ScheduleModel} from "@models/core";
 import {FormControl} from "@angular/forms";
 import {MessageDialogService} from "@servicesApp/core";
@@ -16,9 +21,8 @@ export class AttendanceListComponent implements OnInit {
   attendanceModal: boolean = false;
   isNew: boolean = false;
   AttendanceControl: FormControl = new FormControl<any>(null);
-  private readonly cataloguesHttpService = inject(CataloguesHttpService);
-  private readonly employeesHttpService = inject(EmployeesHttpService);
   private readonly attendanceHttpService = inject(AttendanceHttpService);
+  private readonly reportsHttpService = inject(ReportsHttpService);
   private readonly messageDialogService = inject(MessageDialogService);
   protected readonly PrimeIcons = PrimeIcons;
 
@@ -81,4 +85,8 @@ export class AttendanceListComponent implements OnInit {
       }
     )
   };
+
+  downloadLateAttendances(){
+    this.reportsHttpService.downloadLateAttendance();
+  }
 }

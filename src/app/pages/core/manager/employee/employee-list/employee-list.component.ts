@@ -14,14 +14,19 @@ export class EmployeeListComponent implements OnInit {
   private employeesHttpService = inject(EmployeesHttpService);
   private schedulesHttpService = inject(SchedulesHttpService);
   items: EmployeeModel[] = [];
+  itemsClone: EmployeeModel[] = [];
   selectedItem!: EmployeeModel;
   scheduleControl: FormControl = new FormControl<any>(null);
   employeeModal: boolean = false;
   schedules: ScheduleModel[] = [];
   scheduleModal: boolean = false;
   isNew: boolean = false;
+  searchControl: FormControl = new FormControl(null);
 
   constructor() {
+    this.searchControl.valueChanges.subscribe(value => {
+      this.filterEmployees();
+    })
   }
 
   ngOnInit(): void {
@@ -33,6 +38,7 @@ export class EmployeeListComponent implements OnInit {
     this.employeesHttpService.findAll().subscribe(
       (response: EmployeeModel[]) => {
         this.items = response;
+        this.itemsClone = response;
       }
     );
   }
@@ -81,6 +87,19 @@ export class EmployeeListComponent implements OnInit {
       this.findEmployees();
       this.scheduleModal = false;
     });
+  }
+
+  filterEmployees() {
+    if (this.searchControl.value) {
+      const search = this.searchControl.value.toLowerCase();
+      this.items = this.itemsClone.filter(item =>
+        item.user.name.toLowerCase().includes(search)
+        || item.user.lastname.toLowerCase().includes(search)
+        || item.user.identification.toLowerCase().includes(search)
+      );
+    }else{
+      this.items = this.itemsClone;
+    }
   }
 
   protected readonly PrimeIcons = PrimeIcons;
