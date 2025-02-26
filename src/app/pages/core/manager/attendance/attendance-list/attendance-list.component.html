@@ -1,36 +1,34 @@
 <p-panel class="p-fluid">
+  <!-- ENCABEZADO DEL PANEL -->
   <ng-template pTemplate="header">
     <h2>Lista de Asistencia</h2>
   </ng-template>
-<!--  -->
-  <div class="p-grid p-align-center">
-    <div class="p-col-12 p-md-3">
-      <input
-        pInputText
-        [formControl]="employeeNameControl"
-        placeholder="Buscar por nombre..."
-      />
+  <!-- Botón de Agregar Asistencia -->
+  <div class="field xl:col-2 lg:col-2 md:col-12 sm:col-12">
+    <p-button label="Agregar Asistencia" [icon]="PrimeIcons.PLUS" class="p-button-success" (click)="createAttendanceModal()"></p-button>
+  </div>
+  <!-- FILTROS DE BÚSQUEDA Y BOTÓN -->
+  <div class="formgrid grid">
+    <!-- Campo de búsqueda -->
+    <div class="field xl:col-8 lg:col-8 md:col-12 sm:col-12">
+      <label for="employeeName">Buscar:</label>
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input pInputText id="employeeName" [formControl]="employeeNameControl" placeholder="Buscar por nombre y apellido" class="p-inputtext p-component" />
+      </span>
     </div>
-    <div class="p-col-12 p-md-3">
-      <p-calendar
-        [formControl]="datesControl"
-        selectionMode="range"
-      />
+    <!-- Selección de Fecha -->
+    <div class="field xl:col-2 lg:col-2 md:col-12 sm:col-12">
+      <label for="dates">Rango de fechas:</label>
+      <p-calendar id="dates" [formControl]="datesControl" selectionMode="range" class="p-calendar" showIcon></p-calendar>
     </div>
-
-    <div class="p-col-12 p-md-3">
-      <p-button label="Filtrar" icon="pi pi-search" (click)="filterAttendancesByName()"></p-button>
+    <!-- Botón de Filtrar -->
+    <div class="field xl:col-2 lg:col-2 md:col-12 sm:col-12 p-5">
+      <p-button label="Buscar" icon="pi pi-filter" class="p-button-primary" (click)="filterAttendancesByName()"></p-button>
     </div>
   </div>
 
-
-
-
-
-
-
-<!--  ///////////////////-->
-
+  <!-- CONTENIDO DEL PANEL -->
   <ng-template pTemplate="content">
     <p-table
       [value]="items"
@@ -62,60 +60,31 @@
 
       <ng-template pTemplate="body" let-item>
         <tr>
-          <td>{{ item.employee.user.name }}{{ item.employee.user.lastname }}</td>
+          <td>{{ item.employee.user.name }} {{ item.employee.user.lastname }}</td>
           <td>{{ item.type.name }}</td>
           <td>{{ item.registeredAt | date: 'medium'}}</td>
           <td>
             @if (item.late) {
-              @if (item.type.code === 'entry') {
-                Tarde
-              }
-              @if (item.type.code === 'exit') {
-                Jornada Incompleta
-              }
-              @if (item.type.code === 'lunch_exit') {
-                Almuerzo fuera del tiempo
-              }
+              @if (item.type.code === 'entry') { Tarde }
+              @if (item.type.code === 'exit') { Jornada Incompleta }
+              @if (item.type.code === 'lunch_exit') { Almuerzo fuera del tiempo }
             } @else {
-              @if (item.type.code === 'entry') {
-                A tiempo
-              }
-              @if (item.type.code === 'exit') {
-                A tiempo
-              }
-              @if (item.type.code === 'lunch_return') {
-                A tiempo
-              }
+              @if (item.type.code === 'entry') { A tiempo }
+              @if (item.type.code === 'exit') { A tiempo }
+              @if (item.type.code === 'lunch_return') { A tiempo }
             }
           </td>
           <td>
-            <p-button
-              icon="pi pi-pencil"
-              severity="contrast"
-              pTooltip="Editar"
-              (click)="editAttendanceModal(item)">
-            </p-button>
-            <p-button [icon]="PrimeIcons.TRASH" severity="danger" pTooltip="Eliminar"
-                      (click)="deleteAttendance(item.id)" />
-
+            <p-button icon="pi pi-pencil" severity="contrast" pTooltip="Editar"  (click)="editAttendanceModal(item)"></p-button>
+            <p-button [icon]="PrimeIcons.TRASH" severity="danger" pTooltip="Eliminar" (click)="deleteAttendance(item.id)" />
           </td>
         </tr>
       </ng-template>
     </p-table>
   </ng-template>
-
-  <ng-template pTemplate="header" let-item>
-    <div class="formgrid grid">
-      <div class="col-12">
-        <p-button label="Agregar Asistencia" [icon]="PrimeIcons.PLUS" class="p-button-success"
-                  (click)="createAttendanceModal()"/>
-      </div>
-    </div>
-  </ng-template>
-
 </p-panel>
 
-
+<!-- MODAL PARA EDICIÓN -->
 <p-dialog header="Edit Profile"
           [modal]="true"
           [(visible)]="attendanceModal"
