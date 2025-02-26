@@ -10,7 +10,7 @@ import {MessageDialogService} from "@servicesApp/core";
   templateUrl: './attendance-list.component.html',
   styleUrl: './attendance-list.component.scss'
 })
-export class AttendanceListComponent implements OnInit{
+export class AttendanceListComponent implements OnInit {
   items: AttendanceModel[] = [];
   selectedItem!: AttendanceModel;
   attendanceModal: boolean = false;
@@ -22,12 +22,36 @@ export class AttendanceListComponent implements OnInit{
   private readonly messageDialogService = inject(MessageDialogService);
   protected readonly PrimeIcons = PrimeIcons;
 
-
+  // Nuevos controles para el filtrado
+  employeeNameControl: FormControl = new FormControl('');
+  datesControl: FormControl = new FormControl([]);
+  startedAtControl: FormControl = new FormControl(new Date());
+  endedAtControl: FormControl = new FormControl(new Date());
 
   constructor() {
- }
+  }
+
   ngOnInit(): void {
     this.findAttendances();
+  }
+
+  search() {
+
+  }
+
+  // Nuevo método para filtrar por nombre y fechas
+  filterAttendancesByName(): void {
+    const employeeName = this.employeeNameControl.value;
+    // const startedAt = new Date(this.startedAtControl.value);
+    // const endedAt = new Date(this.endedAtControl.value);
+
+    const startedAt = new Date(this.datesControl.value[0]);
+    const endedAt = new Date(this.datesControl.value[1]);
+
+    this.attendanceHttpService.findAttendancesByEmployeeName(employeeName, startedAt, endedAt)
+      .subscribe((response: AttendanceModel[]) => {
+        this.items = response;
+      });
   }
 
   findAttendances(): void {
@@ -37,7 +61,6 @@ export class AttendanceListComponent implements OnInit{
       }
     );
   }
-
 
   createAttendanceModal(): void {
     this.isNew = true;
@@ -51,11 +74,11 @@ export class AttendanceListComponent implements OnInit{
     this.attendanceModal = true;
   }
 
-  deleteAttendance(id: string): void{
-  this.attendanceHttpService.remove(id).subscribe(()=>{
-    this.findAttendances();
-    this.messageDialogService.errorCustom('Asistencia Eliminada', '');
-    }
-  )};
-
+  deleteAttendance(id: string): void {
+    this.attendanceHttpService.remove(id).subscribe(() => {
+        this.findAttendances();
+        this.messageDialogService.errorCustom('Asistencia Eliminada', '');
+      }
+    )
+  };
 }

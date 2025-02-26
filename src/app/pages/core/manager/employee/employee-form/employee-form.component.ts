@@ -11,7 +11,7 @@ import {PrimeIcons} from "primeng/api";
   styleUrls: ['./employee-form.component.scss']
 })
 export class EmployeeFormComponent implements OnInit {
-  protected form!: FormGroup;
+  form!: FormGroup;
   private readonly formBuilder = inject(FormBuilder);
   protected positions: CatalogueModel[] = [];
   protected sexes: CatalogueModel[] = [];

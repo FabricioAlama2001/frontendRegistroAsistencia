@@ -14,6 +14,8 @@ import {InputSwitchModule} from "primeng/inputswitch";
 import {DialogModule} from "primeng/dialog";
 import {TableModule} from "primeng/table";
 import {TagModule} from "primeng/tag";
+import {InputGroupModule} from "primeng/inputgroup";
+import {InputTextModule} from "primeng/inputtext";
 
 
 @NgModule({
@@ -21,19 +23,21 @@ import {TagModule} from "primeng/tag";
     AttendanceFormComponent,
     AttendanceListComponent
   ],
-  imports: [
-    CommonModule,
-    AttendanceRoutingModule,
-    PanelModule,
-    ReactiveFormsModule,
-    SharedModule,
-    DropdownModule,
-    CheckboxModule,
-    CalendarModule,
-    InputSwitchModule,
-    DialogModule,
-    TableModule,
-    TagModule
-  ]
+    imports: [
+        CommonModule,
+        AttendanceRoutingModule,
+        PanelModule,
+        ReactiveFormsModule,
+        SharedModule,
+        DropdownModule,
+        CheckboxModule,
+        CalendarModule,
+        InputSwitchModule,
+        DialogModule,
+        TableModule,
+        TagModule,
+        InputGroupModule,
+        InputTextModule
+    ]
 })
 export class AttendanceModule { }
